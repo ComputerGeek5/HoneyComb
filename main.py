@@ -24,17 +24,14 @@ class WebPot:
             pass
 
         web_dir = '/etc/honeycomb/web'
-        os.makedirs(web_dir)
         os.chdir(web_dir)
         handler = self.Handler
         httpd = SimpleHTTPServer.HTTPServer((host, port), handler)
         httpd.serve_forever()
 
 
-# host = linecache.getline('/etc/honeycomb/app.conf', 2).split('=')[1]
-# port = int(linecache.getline('/etc/honeycomb/app.conf', 5).split('=')[1])
-
-host = '127.0.0.1'
-port = 80
+# TODO: We should not rely on indexes
+host = linecache.getline('/etc/honeycomb/app.conf', 2).split('=')[1].strip()
+port = int(linecache.getline('/etc/honeycomb/app.conf', 5).split('=')[1].strip())
 
 WebPot(host, port)
