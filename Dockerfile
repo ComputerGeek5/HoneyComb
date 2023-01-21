@@ -2,8 +2,8 @@ FROM python:3.10-alpine
 
 WORKDIR /root/honeycomb
 
-#COPY requirements.txt ./
-#RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 EXPOSE 80

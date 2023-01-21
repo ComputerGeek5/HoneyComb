@@ -1,8 +1,9 @@
 .idea
 venv
 .git
-.app.conf.example
 .gitignore
 Dockerfile
 README.md
-app.conf.example
+.env.example
+install.sh
+uninstall.sh

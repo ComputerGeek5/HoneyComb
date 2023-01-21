@@ -6,5 +6,7 @@ in install.sh like shown below:
 docker run -d -p <YOUR_PORT>:80 ... 
 ```
 
+Additionally, you can delete the docker container and image associated with it by running the uninstall.sh script.
+
 # Install in Linux
 Run the configure.sh with a shell of your choice script and then run main.py with the python command

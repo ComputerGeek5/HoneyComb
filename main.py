@@ -1,16 +1,15 @@
 import http.server as SimpleHTTPServer
 import os
-from datetime import date, datetime
-import linecache
+from datetime import date
+from dotenv import dotenv_values
 
 date_today = date.today()
-now = datetime.now()
 
 
 class WebPot:
     class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         def log_message(self, format, *args):
-            log_file = open(f'/etc/honeycomb/logs/web_{date_today}/log.txt', 'w', 1)
+            log_file = open(f'/etc/honeycomb/logs/web/{date_today}/log.txt', 'a', 1)
             log_file.write('IP: %s\nDate: [%s]\n%s%s\n\n' % (
                 self.client_address[0], self.log_date_time_string(), self.headers, format % args))
 
@@ -19,19 +18,19 @@ class WebPot:
         self.port = port
 
         try:
-            os.makedirs(f'/etc/honeycomb/logs/web_{date_today}')
+            os.makedirs(f'/etc/honeycomb/logs/web/{date_today}')
         except FileExistsError:
             pass
 
-        web_dir = '/etc/honeycomb/web'
+        web_dir = '/etc/honeycomb/web_bait'
         os.chdir(web_dir)
         handler = self.Handler
         httpd = SimpleHTTPServer.HTTPServer((host, port), handler)
         httpd.serve_forever()
 
 
-# TODO: We should not rely on indexes
-host = linecache.getline('/etc/honeycomb/app.conf', 2).split('=')[1].strip()
-port = int(linecache.getline('/etc/honeycomb/app.conf', 5).split('=')[1].strip())
+env = dotenv_values('.env')
+host = env['IP']
+port = int(env['WEB_PORT'])
 
 WebPot(host, port)
