@@ -8,6 +8,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 EXPOSE 80
 EXPOSE 21
+EXPOSE 23
 
 RUN chmod +x configure.sh
 #TODO: Make the script environment-agnostic in the future

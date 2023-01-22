@@ -5,5 +5,7 @@ venv
 Dockerfile
 README.md
 .env.example
-install.sh
-uninstall.sh
+docker_install.sh
+docker_uninstall.sh
+linux_uninstall.sh
+get-pip.py
